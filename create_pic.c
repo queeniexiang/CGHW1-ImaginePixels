@@ -16,17 +16,18 @@ int main() {
   printf("fd: %d\n", fd);
 
   //Writing header to file
-  write(fd, header, sizeof(header));
+  write(fd, header, strlen(header));
 
   //Seeding time to rand() 
   srand(time(NULL));
 
   //Creating buffer that will store each rgb value 
-  char buffer[16];
+  
   
   for (int count1 = 0; count1 < 500; count1++) {
     for (int count2 = 0; count2 < 500; count2++) {
 
+      char buffer[16];
       int red;
       int green;
       int blue;
@@ -35,6 +36,12 @@ int main() {
 	red = 255;
 	green = 192;
 	blue = 203;
+      }
+
+      if (count1*2 == count2*2) {
+	red = 25;
+	green = 25;
+	blue = 112;
       }
 
       else { 
@@ -47,7 +54,7 @@ int main() {
       sprintf(buffer, "%d %d %d ", red, green, blue);
 
       //Write buffer to the file 
-      write(fd, buffer, sizeof(buffer));
+      write(fd, buffer, strlen(buffer));
     }
 
     //Writes a newline to the file
